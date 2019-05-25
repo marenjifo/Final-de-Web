@@ -28,7 +28,20 @@ body{
     opacity: .6;
 }
 
-
+//Juego con P5
+#juego{
+  //background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/imgs/switch.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 1.3em;
+  margin: 2em 0;
+}
 
 .app{
     display: flex;
