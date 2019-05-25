@@ -4,6 +4,11 @@ class Logica{
     this.app=app;
     this.pantalla=-1;
     this.app.imageMode(this.app.CENTER);
+    this.morir=false;
+    this.ganar=false;
+    this.vidas=3;
+    this.puntaje=0;
+    this.tiempo=10;
       }
 
     pintar(){
@@ -18,10 +23,23 @@ class Logica{
         
             case 1:
                 this.app.background(0);
+                this.app.fill(255);
+                this.app.text("Vidas: "+this.vidas,25,25);
+                this.app.text("Puntos: "+this.puntaje,25,55);
+                this.app.text("Tiempo: "+this.tiempo,25,85);
                 this.personaje.pintar();
                 for (let i = 0; i < this.enemigos.length; i++) {
                     this.enemigos[i].pintar();  
                 } 
+                if(this.app.frameCount%60==0){
+                    this.tiempo--;
+                }
+                if(this.morir){
+                    this.pantalla=2;
+                }
+                if(this.ganar){
+                    this.pantalla=3;
+                }
                 break;
             case 2:
                 this.app.background(255,0,0);
@@ -92,7 +110,19 @@ class Logica{
             
         }
 
+        if(this.vidas==0 || this.tiempo<=0){
+            this.morir=true;
+        }
 
+        if(this.puntaje<=0){
+            this.puntaje=0;
+        }
+
+        if(this.puntaje==3 && this.tiempo>0){
+            this.ganar=true;
+        }
+
+        this.validarColisiones();
 
     }
 
@@ -113,7 +143,43 @@ class Logica{
     }
 
     
+    validarColisiones(){
 
+        if(Personaje.estrellas!=null){
+        for (let i = 0; i < Personaje.estrellas.length; i++) {
+            for (let j = 0; j < this.enemigos.length; j++) { 
+            let estrella= Personaje.estrellas[i];
+            let enemigo= this.enemigos[j];
+            if(this.app.dist(estrella.x,estrella.y,enemigo.x,enemigo.y)<=20){
+                enemigo.stop();
+                estrella.stop();
+                this.enemigos.splice(j,1);
+                Personaje.estrellas.splice(i,1);
+                this.puntaje++;
+                return;
+            }
+            
+        }
+        
+     }
+    }
+       
+            for (let j = 0; j < this.enemigos.length; j++) { 
+            let perso= this.personaje;
+            let enemigo= this.enemigos[j];
+            if(this.app.dist(perso.x,perso.y,enemigo.x,enemigo.y)<=20){
+                enemigo.stop();
+                this.enemigos.splice(j,1);
+                this.vidas--;
+                this.puntaje--;
+                return;
+            }
+            
+        }
+        
+
+
+}
 
 
 }

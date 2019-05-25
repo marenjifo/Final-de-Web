@@ -20,6 +20,12 @@ new p5(function(app){
   
     app.mousePressed = function(){
       log.mouse();
+      if(log.morir==true && log.pantalla==2){
+        this.setup();
+      }
+      if(log.ganar==true && log.pantalla==3){
+        this.setup();
+      }
     }
     
     
