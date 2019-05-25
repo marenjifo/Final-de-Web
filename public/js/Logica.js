@@ -53,10 +53,26 @@ class Logica{
 
     }
 
+    update(){
+
+        for (let i = 0; i < Personaje.estrellas.length; i++) {
+            if(Personaje.estrellas[i].y<=(-30)){
+                Personaje.estrellas.splice(i,1);
+            }
+            
+        }
+
+
+
+    }
+
 
     teclado(){ 
 
         this.personaje.mover();   
+        if(this.app.key=='a'){
+            this.personaje.disparar();
+        }
        
     }
 

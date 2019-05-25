@@ -1,6 +1,6 @@
 class Personaje{
     
-
+    static estrellas=[];
     constructor(app,x,y){
         
         this.app=app;
@@ -22,7 +22,9 @@ class Personaje{
 pintar(){
 
 this.app.image(this.imagen[this.punt],this.x,this.y);
-
+for (let i = 0; i < Personaje.estrellas.length; i++) {
+    Personaje.estrellas[i].pintar();
+}
 
 if(this.moverIzq && this.x>30){
     this.x-=4;
@@ -70,6 +72,8 @@ parar(){
     }
 }
 
-
+disparar(){
+    Personaje.estrellas.push(new Estrella(this.app,this.x,this.y));
+}
 
 }
