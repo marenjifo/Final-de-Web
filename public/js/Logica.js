@@ -4,7 +4,6 @@ class Logica{
     this.app=app;
     this.pantalla=-1;
     this.app.imageMode(this.app.CENTER);
-    //this.fondo=this.app.loadImage("/imgs/switch.png");
       }
 
     pintar(){
@@ -19,7 +18,7 @@ class Logica{
         
             case 1:
                 this.app.background(0);
-                
+                this.personaje.pintar();
                 break;
             case 2:
                 this.app.background(255,0,0);
@@ -44,7 +43,7 @@ class Logica{
            
             case 0:
                  this.pantalla=1;
-                
+                 this.personaje = new Personaje(this.app,600,380);
                 break;
         
             case 1:
@@ -57,13 +56,13 @@ class Logica{
 
     teclado(){ 
 
-      
+        this.personaje.mover();   
        
     }
 
     soltarTeclado(){
 
-       
+        this.personaje.parar();
        
     }
 
