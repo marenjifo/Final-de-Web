@@ -4,27 +4,30 @@ window.addEventListener("load" , function(){
     feather.replace();
     //TweenMax.to(".producto__corazon", 2, {backgroundColor:"#ff0000", width:"30%", top:"100px", ease:Power2.easeInOut});
     
+    //Animacion GSAP de botones corazon
     var btnCor=document.querySelectorAll('.producto__corazon');
+    
+    function animarCarrito() {
+        var tl2 = new TimelineMax();
+        tl2.add( TweenMax.to(".app__carrito", 0.25, {rotation:15,scale:1.15,ease: Power2.easeOut}) );
+        tl2.add( TweenMax.to(".app__carrito", 0.25, {rotation:-15,scale:1.15,ease: Power2.easeOut}) );
+        tl2.add( TweenMax.to(".app__carrito", 0.25, {rotation:0,scale:1,ease: Power2.easeOut}) );
+    }
+
+    
+    if(btnCor!=null){ 
     btnCor.forEach(function(btn){
 
         btn.addEventListener('mouseenter',function(){
 
             var padre= btn.parentNode.parentNode;
             var cor = padre.querySelector('.cor');
-            console.log(cor);
-         
-                var tl = new TimelineMax({repeat:1});
+            var tl = new TimelineMax({repeat:1});
             tl.add( TweenMax.to(cor, 0.2, {scale:1.2, ease: Bounce.easeOut}) );
             tl.add( TweenMax.to(cor, 0.2, {scale:1, ease:Power2.easeInOut}) );
-         
-
-            
         });
-
-        
-
     });
-    
+}
     
     var botonCarrito = document.querySelector(".goCarrito");
     var botonComprar=document.querySelector('.irCheck');
@@ -50,7 +53,7 @@ window.addEventListener("load" , function(){
     ("listaProductos"));
     }
     //Agregar productos desde la tienda
-    var tienda_agregar = document.querySelectorAll(".mas-tienda");
+    var tienda_agregar = document.querySelectorAll(".producto__mas");
     var detalles_agregar = document.querySelectorAll(".mas-detalles");
     var num__productos = document.querySelector(".app__NoProducto");
     var paraComprar=document.querySelector('.carrito__izquierda');
@@ -59,7 +62,7 @@ window.addEventListener("load" , function(){
 
     function actualizarCarrito(){
         var suma=0;
-
+        animarCarrito();
         //Numero de productos en el carrito
         if(num__productos!=null){
             num__productos.innerHTML=listaProductos.length;
@@ -164,6 +167,8 @@ window.addEventListener("load" , function(){
             var categoria=  padre.querySelector(".categoria").value;
             var imagen=  padre.querySelector(".producto__img").style.backgroundImage;
             var imagenUrl = imagen.replace('url(','').replace(')','');
+            var textoMas= padre.querySelector('.texto__mas');
+            var masTienda=padre.querySelector('.mas-tienda');
 
             var producto ={
                 nombre:nombre,
@@ -175,6 +180,15 @@ window.addEventListener("load" , function(){
             listaProductos.push(producto);
             actualizarCarrito();
             console.log(producto.precio);
+            //Animacion GSAP cuando se agrega al carrito
+            var tl3 = new TimelineMax();
+            var tl=new TimelineMax();
+            tl.add( TweenMax.to(btn, 0.7, {width:"30%",ease: Bounce.easeOut}) );
+            tl3.add( TweenMax.to(masTienda, 1.3, {rotation:180,scale:1.2,ease: Bounce.easeOut}) );
+            tl3.add( TweenMax.to(masTienda, 0.8, {scale:0,display:"none",ease: Bounce.easeOut}) );
+            tl3.add( TweenMax.to(textoMas, 0.1, {scale:0,ease: Bounce.easeOut}) );
+            tl3.add( TweenMax.to(textoMas, 0.5, {scale:1,display:"block",ease: Bounce.easeOut}) );
+            tl3.add( TweenMax.to(btn, 0.8, {backgroundColor:"#A5E879",ease: Power2.easeOut}) );
 
         });
     }

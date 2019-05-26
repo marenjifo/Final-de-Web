@@ -42,9 +42,10 @@ body{
   padding: 1.3em;
   margin: 2em 0;
 }
-svg {
-  display: block;
-  width:50px;
+.texto__mas{
+  display: none;
+  font-family: $texto;
+  font-size: 0.6em;
 }
 
 .app{
@@ -1203,25 +1204,37 @@ margin: 1em 6%  -1em 6%;
     color: white;
     font-size: 1.9em;
     background-color: $azul-principal;
-    padding: 5px;
     border-radius: 5px;
+    width: 1.6em;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+
   }
   &__mas{
     color: white;
     font-size: 1.9em;
     background-color: $gris-principal;
-    padding: 5px;
+   // padding: 5px;
+    width: 1.6em;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   
   &__iconos{
     display: flex;
     flex-direction: row;
-    height: 20%;
+    height: 7em;
     padding: 5px;
     width: 100%;    
-   // background-color: #ec0235;
+   //background-color: #ec0235;
     justify-content: space-between;
    
   }
