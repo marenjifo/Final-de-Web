@@ -2,7 +2,30 @@
 
 window.addEventListener("load" , function(){
     feather.replace();
+    //TweenMax.to(".producto__corazon", 2, {backgroundColor:"#ff0000", width:"30%", top:"100px", ease:Power2.easeInOut});
+    
+    var btnCor=document.querySelectorAll('.producto__corazon');
+    btnCor.forEach(function(btn){
 
+        btn.addEventListener('mouseenter',function(){
+
+            var padre= btn.parentNode.parentNode;
+            var cor = padre.querySelector('.cor');
+            console.log(cor);
+         
+                var tl = new TimelineMax({repeat:1});
+            tl.add( TweenMax.to(cor, 0.2, {scale:1.2, ease: Bounce.easeOut}) );
+            tl.add( TweenMax.to(cor, 0.2, {scale:1, ease:Power2.easeInOut}) );
+         
+
+            
+        });
+
+        
+
+    });
+    
+    
     var botonCarrito = document.querySelector(".goCarrito");
     var botonComprar=document.querySelector('.irCheck');
     function aCarrito(){

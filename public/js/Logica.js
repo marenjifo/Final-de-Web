@@ -8,7 +8,7 @@ class Logica{
     this.ganar=false;
     this.vidas=3;
     this.puntaje=0;
-    this.tiempo=10;
+    this.tiempo=30;
       }
 
     pintar(){

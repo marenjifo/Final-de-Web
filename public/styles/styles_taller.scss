@@ -42,6 +42,10 @@ body{
   padding: 1.3em;
   margin: 2em 0;
 }
+svg {
+  display: block;
+  width:50px;
+}
 
 .app{
     display: flex;
