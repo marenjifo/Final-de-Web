@@ -6,6 +6,7 @@ class Personaje{
         this.app=app;
         this.x=x;
         this.y=y;
+        this.vel=4;
         this.imagen=[];
         for (let i = 0; i < 4; i++) {
            this.imagen.push(this.app.loadImage('/imgs/kirDown' + (i+1)+ '.png'));
@@ -27,11 +28,11 @@ for (let i = 0; i < Personaje.estrellas.length; i++) {
 }
 
 if(this.moverIzq && this.x>30){
-    this.x-=4;
+    this.x-=this.vel;
 }
 
 if(this.moverDer && this.x<720){
-    this.x+=4;
+    this.x+=this.vel;
 }
 
 }

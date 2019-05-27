@@ -10,6 +10,7 @@ class Enemigo{
         this.animar=setInterval(this.animacion,200);
         this.mover=this.mover.bind(this);
         this.moviendose=setInterval(this.mover,20);
+        this.vel=2;
     }
 
 
@@ -25,7 +26,7 @@ animacion(){
 }
 
 mover(){
-this.y+=2;
+this.y+=this.vel;
 
 }
 

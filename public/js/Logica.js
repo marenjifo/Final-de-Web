@@ -6,10 +6,12 @@ class Logica{
     this.app.imageMode(this.app.CENTER);
     this.morir=false;
     this.ganar=false;
+    this.poder=false;
+    this.contPoder=0;
     this.vidas=3;
     this.puntaje=0;
     this.tiempo=30;
-      }
+    }
 
     pintar(){
 
@@ -31,6 +33,11 @@ class Logica{
                 for (let i = 0; i < this.enemigos.length; i++) {
                     this.enemigos[i].pintar();  
                 } 
+                
+                for (let i = 0; i < this.poderes.length; i++) {
+                    this.poderes[i].pintar();  
+                } 
+
                 if(this.app.frameCount%60==0){
                     this.tiempo--;
                 }
@@ -65,11 +72,17 @@ class Logica{
             case 0:
                  this.pantalla=1;
                  this.personaje = new Personaje(this.app,600,380);
+                
                  this.enemigos= [];
                  this.generarEnemigos=this.generarEnemigos.bind(this);
-                 setInterval(this.generarEnemigos,2000);
+                 setInterval(this.generarEnemigos,1500);
+                 
                  this.update=this.update.bind(this);
                  setInterval(this.update,20);
+                 
+                 this.poderes= [];
+                 this.generarPoderes=this.generarPoderes.bind(this);
+                 setInterval(this.generarPoderes,3000);
                 break;
         
             case 1:
@@ -91,6 +104,10 @@ class Logica{
                 break;
         }
         
+    }
+
+    generarPoderes(){
+        this.poderes.push(new Poder(this.app));
     }
 
     update(){
@@ -120,6 +137,30 @@ class Logica{
 
         if(this.puntaje==3 && this.tiempo>0){
             this.ganar=true;
+        }
+
+        if(this.poder==true){
+
+            if(this.app.frameCount%60==0){
+                this.contPoder++;
+            }
+            for (let i = 0; i < this.enemigos.length; i++) {
+                this.enemigos[i].vel=1;
+            }
+
+            this.personaje.vel=8;
+
+            if(this.contPoder==10){
+                this.contPoder=0;
+                this.poder=false;
+            }
+        }else{
+
+            for (let i = 0; i < this.enemigos.length; i++) {
+                this.enemigos[i].vel=2;
+            }
+
+            this.personaje.vel=4;
         }
 
         this.validarColisiones();
@@ -157,12 +198,11 @@ class Logica{
                 Personaje.estrellas.splice(i,1);
                 this.puntaje++;
                 return;
-            }
-            
-        }
+                 }
+              }
         
-     }
-    }
+           }
+        }
        
             for (let j = 0; j < this.enemigos.length; j++) { 
             let perso= this.personaje;
@@ -172,6 +212,19 @@ class Logica{
                 this.enemigos.splice(j,1);
                 this.vidas--;
                 this.puntaje--;
+                return;
+            }
+            
+        }
+
+        for (let j = 0; j < this.poderes.length; j++) { 
+            let perso= this.personaje;
+            let poder= this.poderes[j];
+            if(this.app.dist(perso.x,perso.y,poder.x,poder.y)<=20){
+                poder.stop();
+                this.poderes.splice(j,1);
+                this.puntaje+=2;
+                this.poder=true;
                 return;
             }
             
