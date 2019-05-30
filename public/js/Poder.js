@@ -6,7 +6,7 @@ class Poder{
         this.y=-100;
         this.mover=this.mover.bind(this);
         this.moviendose=setInterval(this.mover,20);
-        this.imagen=this.app.loadImage('/imgs/kirDown4.png');
+        this.imagen=this.app.loadImage('/imgs/poder.png');
     }
 
 

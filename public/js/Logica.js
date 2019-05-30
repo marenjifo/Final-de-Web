@@ -16,6 +16,7 @@ class Logica{
     this.barra=this.app.loadImage('/imgs/barra.png');
     this.perdiste=this.app.loadImage('/imgs/perdiste.png');
     this.ganaste=this.app.loadImage('/imgs/ganaste.png');
+    this.instrucciones=this.app.loadImage('/imgs/instrucciones.png');
     }
 
     pintar(){
@@ -26,7 +27,7 @@ class Logica{
                     this.app.image(this.inicio,this.app.width/2,this.app.height/2);
                 break;
             case 0:
-                    this.app.background(255,255,0);
+                    this.app.image(this.instrucciones,this.app.width/2,this.app.height/2);
                     
                 break;
         
@@ -95,7 +96,7 @@ class Logica{
                  
                  this.poderes= [];
                  this.generarPoderes=this.generarPoderes.bind(this);
-                 setInterval(this.generarPoderes,3000);
+                 setInterval(this.generarPoderes,10000);
                 break;
         
             case 1:
@@ -127,11 +128,30 @@ class Logica{
 
 
         for (let i = 0; i < this.enemigos.length; i++) {
+
+            if(this.enemigos[i] instanceof Bala){
             if(this.enemigos[i].y>=(this.app.height+30)){
                 this.enemigos.splice(i,1);
+
+            }
+
+            }
+                if(this.enemigos[i] instanceof Bala2){
+                    if(this.enemigos[i].y>=(this.app.height)){
+                    this.morir=true;
+                    this.enemigos.splice(i,1);
+                   
+                }
+                if(this.enemigos[i].y>=(this.app.height-200)){
+                
+                   this.enemigos[i].estado=1;
+                }else{
+                this.enemigos[i].estado=0;
+                }
             }
             
-        }
+        
+    }
 
         for (let i = 0; i < Personaje.estrellas.length; i++) {
             if(Personaje.estrellas[i].y<=(-30)){
@@ -148,7 +168,7 @@ class Logica{
             this.puntaje=0;
         }
 
-        if(this.puntaje>=3 && this.tiempo>0){
+        if(this.puntaje>=10 && this.tiempo>0){
             this.ganar=true;
         }
 
@@ -223,7 +243,7 @@ class Logica{
             for (let j = 0; j < this.enemigos.length; j++) { 
             let perso= this.personaje;
             let enemigo= this.enemigos[j];
-            if(this.app.dist(perso.x,perso.y,enemigo.x,enemigo.y)<=20){
+            if(this.app.dist(perso.x,perso.y,enemigo.x,enemigo.y)<=30){
                 enemigo.stop();
                 this.enemigos.splice(j,1);
                 this.vidas--;
@@ -236,10 +256,9 @@ class Logica{
         for (let j = 0; j < this.poderes.length; j++) { 
             let perso= this.personaje;
             let poder= this.poderes[j];
-            if(this.app.dist(perso.x,perso.y,poder.x,poder.y)<=20){
+            if(this.app.dist(perso.x,perso.y,poder.x,poder.y)<=30){
                 poder.stop();
                 this.poderes.splice(j,1);
-                this.puntaje+=2;
                 this.poder=true;
                 return;
             }

@@ -2,9 +2,11 @@ class Enemigo{
 
     constructor(app){
         this.app=app;
-        this.x=this.app.random(this.app.width);
+        this.x=this.app.random(30,720);
         this.y=-100;
         this.imagen=[];
+        this.imagen2=[];
+        this.estado=0;
         this.punt=0;
         this.animacion=this.animacion.bind(this);
         this.animar=setInterval(this.animacion,200);
@@ -15,7 +17,15 @@ class Enemigo{
 
 
 pintar(){
-this.app.image(this.imagen[this.punt],this.x,this.y);
+    switch (this.estado) {
+        case 0:
+            this.app.image(this.imagen[this.punt],this.x,this.y);
+            break;
+            
+        case 1:
+                this.app.image(this.imagen2[this.punt],this.x,this.y);
+            break;
+    }
 }
 
 animacion(){

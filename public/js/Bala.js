@@ -6,6 +6,12 @@ class Bala extends Enemigo{
            this.imagen.push(this.app.loadImage('/imgs/eneN' + (i+1)+ '.png'));
             
         }
+        for (let i = 0; i < 4; i++) {
+            this.imagen2.push(this.app.loadImage('/imgs/eneN' + (i+1)+ '.png'));
+             
+         }
+        
+        
     }
 
 
