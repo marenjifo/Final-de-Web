@@ -7,14 +7,19 @@ class Personaje{
         this.x=x;
         this.y=y;
         this.vel=4;
+        this.estado=0;
         this.imagen=[];
         for (let i = 0; i < 4; i++) {
-           this.imagen.push(this.app.loadImage('/imgs/kirDown' + (i+1)+ '.png'));
-            
+           this.imagen.push(this.app.loadImage('/imgs/kir' + (i+1)+ '.png'));
+        }
+        this.imagen2=[];
+           for (let i = 0; i < 4; i++) {
+              this.imagen2.push(this.app.loadImage('/imgs/kirP' + (i+1)+ '.png'));
+               
         }
         this.punt=0;
         this.animacion=this.animacion.bind(this);
-        setInterval(this.animacion,200);
+        setInterval(this.animacion,280);
         this.moverIzq=false;
         this.moverDer=false;    
     }
@@ -22,10 +27,21 @@ class Personaje{
 
 pintar(){
 
-this.app.image(this.imagen[this.punt],this.x,this.y);
-for (let i = 0; i < Personaje.estrellas.length; i++) {
-    Personaje.estrellas[i].pintar();
-}
+    for (let i = 0; i < Personaje.estrellas.length; i++) {
+        Personaje.estrellas[i].pintar();
+    }
+
+    switch (this.estado) {
+        case 0:
+            this.app.image(this.imagen[this.punt],this.x,this.y);
+            break;
+            
+        case 1:
+            this.app.image(this.imagen2[this.punt],this.x,this.y);
+            break;
+    }
+
+
 
 if(this.moverIzq && this.x>30){
     this.x-=this.vel;

@@ -11,24 +11,29 @@ class Logica{
     this.vidas=3;
     this.puntaje=0;
     this.tiempo=30;
+    this.inicio=this.app.loadImage('/imgs/inicio.png');
+    this.nivel=this.app.loadImage('/imgs/nivel.png');
+    this.barra=this.app.loadImage('/imgs/barra.png');
+    this.perdiste=this.app.loadImage('/imgs/perdiste.png');
+    this.ganaste=this.app.loadImage('/imgs/ganaste.png');
     }
 
     pintar(){
 
         switch (this.pantalla) {
             case -1:
-                    this.app.background(255,0,255);
+                    
+                    this.app.image(this.inicio,this.app.width/2,this.app.height/2);
                 break;
             case 0:
                     this.app.background(255,255,0);
+                    
                 break;
         
             case 1:
                 this.app.background(0);
-                this.app.fill(255);
-                this.app.text("Vidas: "+this.vidas,25,25);
-                this.app.text("Puntos: "+this.puntaje,25,55);
-                this.app.text("Tiempo: "+this.tiempo,25,85);
+                this.app.image(this.nivel,this.app.width/2,this.app.height/2);
+                
                 this.personaje.pintar();
                 for (let i = 0; i < this.enemigos.length; i++) {
                     this.enemigos[i].pintar();  
@@ -37,6 +42,14 @@ class Logica{
                 for (let i = 0; i < this.poderes.length; i++) {
                     this.poderes[i].pintar();  
                 } 
+
+                //Barra de puntaje, vidas y tiempo
+                this.app.image(this.barra,this.app.width/2,this.app.height/2);
+                this.app.fill(255);
+                this.app.textSize(20);
+                this.app.text(this.vidas,700,30);
+                this.app.text(this.puntaje,490,30);
+                this.app.text(this.tiempo,590,30);
 
                 if(this.app.frameCount%60==0){
                     this.tiempo--;
@@ -49,11 +62,11 @@ class Logica{
                 }
                 break;
             case 2:
-                this.app.background(255,0,0);
+                this.app.image(this.perdiste,this.app.width/2,this.app.height/2);
             break;
 
             case 3:
-                this.app.background(0,255,0);
+                this.app.image(this.ganaste,this.app.width/2,this.app.height/2);
                 break;
         }
   
@@ -135,7 +148,7 @@ class Logica{
             this.puntaje=0;
         }
 
-        if(this.puntaje==3 && this.tiempo>0){
+        if(this.puntaje>=3 && this.tiempo>0){
             this.ganar=true;
         }
 
@@ -148,12 +161,14 @@ class Logica{
                 this.enemigos[i].vel=1;
             }
 
-            this.personaje.vel=8;
+            
 
             if(this.contPoder==10){
                 this.contPoder=0;
                 this.poder=false;
             }
+            this.personaje.vel=8;
+            this.personaje.estado=1;
         }else{
 
             for (let i = 0; i < this.enemigos.length; i++) {
@@ -161,6 +176,7 @@ class Logica{
             }
 
             this.personaje.vel=4;
+            this.personaje.estado=0;
         }
 
         this.validarColisiones();
