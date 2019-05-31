@@ -22,15 +22,29 @@ var assert = require('assert');
 const url = 'mongodb://localhost:27017';
 const dbName = 'tienda';
 const client = new MongoClient(url, { useNewUrlParser: true });
-var clientdb=null;
+var db=null;
 
 //Mongo: conectar (Paso 2)
-client.connect(function(err) {
-   assert.equal(null, err);
-   console.log("Connected successfully to server");
-   clientdb = client.db(dbName);
-  // client.close();
- });
+MongoClient.connect('mongodb+srv://@cluster0-9mbbi.mongodb.net/tienda',
+
+{
+
+    auth: {
+        user: 'marenjifo',
+        password: 'renjifoconj23'
+    }
+   
+ },
+ function(err,client){
+     if(err) throw err;
+    db=client.db('tienda');
+    //Iniciar servidor
+    app.listen(process.env.PORT || 3000);
+ }
+ 
+ 
+ 
+ );
 
 
 //________________________________________
@@ -197,7 +211,7 @@ app.post('/comprado',function(req,res){
     res.redirect('/tienda/Juegos');
 });
 
-//3. Decirle por que puerto ecuchar  
+/* Decirle por que puerto ecuchar  
 app.listen(3000, function(){
 console.log('Holi servidor');
-});
+});*/
