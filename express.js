@@ -25,7 +25,7 @@ const client = new MongoClient(url, { useNewUrlParser: true });
 var db=null;
 
 //Mongo: conectar (Paso 2)
-client.connect('mongodb+srv://@cluster0-9mbbi.mongodb.net/tienda',
+MongoClient.connect('mongodb+srv://cluster0-9mbbi.mongodb.net/tienda',
 
 {
 
