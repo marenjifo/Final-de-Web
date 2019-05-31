@@ -25,13 +25,13 @@ const client = new MongoClient(url, { useNewUrlParser: true });
 var db=null;
 
 //Mongo: conectar (Paso 2)
-MongoClient.connect('mongodb+srv://@cluster0-9mbbi.mongodb.net/tienda',
+client.connect('mongodb+srv://@cluster0-9mbbi.mongodb.net/tienda',
 
 {
 
     auth: {
         user: 'marenjifo',
-        password: 'renjifoconj!23'
+        password: 'renjifoconj23'
     }
    
  },
