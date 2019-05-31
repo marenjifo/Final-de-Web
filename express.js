@@ -22,7 +22,7 @@ var assert = require('assert');
 const url = 'mongodb://localhost:27017';
 const dbName = 'tienda';
 const client = new MongoClient(url, { useNewUrlParser: true });
-var db=null;
+var clientdb = null;
 
 //Mongo: conectar (Paso 2)
 MongoClient.connect('mongodb+srv://cluster0-9mbbi.mongodb.net/tienda',
@@ -37,7 +37,7 @@ MongoClient.connect('mongodb+srv://cluster0-9mbbi.mongodb.net/tienda',
  },
  function(err,client){
      if(err) throw err;
-    db=client.db('tienda');
+    clientdb=client.db('tienda');
     //Iniciar servidor
     app.listen(process.env.PORT || 3000);
  }
