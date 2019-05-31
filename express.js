@@ -31,7 +31,7 @@ MongoClient.connect('mongodb+srv://@cluster0-9mbbi.mongodb.net/tienda',
 
     auth: {
         user: 'marenjifo',
-        password: 'renjifoconj23'
+        password: 'renjifoconj!23'
     }
    
  },
